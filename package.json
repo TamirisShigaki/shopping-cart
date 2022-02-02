@@ -9,7 +9,7 @@
     "cypress": "cypress run",
     "cypress:open": "cypress open",
     "lint": "eslint --no-inline-config --no-error-on-unmatched-pattern -c .eslintrc.json . --ext .js",
-    "lint:styles": "stylelint **/*.css --config .stylelintrc.json --ignore-disables --allow-empty-input",
+    "lint:styles": "stylelint *.css --config .stylelintrc.json --ignore-disables --allow-empty-input",
     "serialize": "node -e 'require(\"./cypress/utils/testCoverage.js\").testCoverage()'"
   },
   "jest": {
