@@ -54,8 +54,29 @@ async function appendProduct() {
   });
 }
 
-window.onload = () => {
-  appendProduct();
+function addButtonsEvent() {
+  const itens = document.querySelectorAll('.item');
+    itens.forEach((item) => {
+      const sku = getSkuFromProductItem(item);
+      const button = item.querySelector('button');
+      button.addEventListener('click', async () => {
+        const objeto = await fetchItem(sku);
+        const criaObj = {
+          sku: objeto.id,
+          name: objeto.title,
+          salePrice: objeto.price,
+        };
+        const section = document.querySelector('.cart__items');
+        section.appendChild(createCartItemElement(criaObj));
+      });
+    });
+}
+
+window.onload = async () => {
+  await appendProduct();
+  addButtonsEvent();
 };
 
 //! function appendProduct() com ajuda do Kleverson Eller - Turma 19-C
+
+//! function addButtonsEvent() com ajuda do Roberval - monitoria
