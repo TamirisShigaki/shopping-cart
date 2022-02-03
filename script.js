@@ -40,20 +40,22 @@ function createCartItemElement({ sku, name, salePrice }) {
   return li;
 }
 
-async function test() {
-  const bolinha = await fetchProducts('computador');
-  bolinha.results.forEach((elemento) => {
-    const obj = {
+async function appendProduct() {
+  const objeto = await fetchProducts('computador');
+  objeto.results.forEach((elemento) => {
+    const criaObj = {
       sku: elemento.id,
       name: elemento.title,
       image: elemento.thumbnail,
   };
 
   const section = document.querySelector('.items');
-  section.appendChild(createProductItemElement(obj));
+  section.appendChild(createProductItemElement(criaObj));
   });
 }
 
 window.onload = () => {
-  test();
+  appendProduct();
 };
+
+//! function appendProduct() com ajuda do Kleverson Eller - Turma 19-C

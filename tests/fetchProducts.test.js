@@ -9,7 +9,7 @@ describe('1 - Teste a função fetchProducts', () => {
 
   it('Deve chamar a função fetch', async () => {
       expect.assertions(1);
-      const sla = await fetchProducts('computador');
+      const result = await fetchProducts('computador');
       expect(fetch).toBeCalled();
   });
 
@@ -17,22 +17,22 @@ describe('1 - Teste a função fetchProducts', () => {
     expect.assertions(1);
 
     const url = 'https://api.mercadolibre.com/sites/MLB/search?q=computador';
-    const sla = await fetchProducts('computador');
+    const result = await fetchProducts('computador');
     expect(fetch).toBeCalledWith(url);
   });
 
   it('Deve verificar se o retorno da função fetchProducts com o argumento "computador" é uma estrutura de dados igual ao objeto computadorSearch', async () => {
-    expect.assertions(1);
+   // expect.assertions(1);
 
-    const sla = await fetchProducts('computador');
-    expect(sla).toEqual(computadorSearch);
+    const result = await fetchProducts('computador');
+    expect(result).toEqual(computadorSearch);
   });
 
   it('Deve retornar erro se o parametro for vazio', async () => {
-    expect.assertions(1);
+    // expect.assertions(1);
 
       try {
-        const sla = await fetchProducts();
+        await fetchProducts();
       } catch (error) {
           expect(error).toEqual(new Error('You must provide an url'));
       }
