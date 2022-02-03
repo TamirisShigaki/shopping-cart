@@ -22,14 +22,14 @@ describe('1 - Teste a função fetchProducts', () => {
   });
 
   it('Deve verificar se o retorno da função fetchProducts com o argumento "computador" é uma estrutura de dados igual ao objeto computadorSearch', async () => {
-   // expect.assertions(1);
+   expect.assertions(1);
 
     const result = await fetchProducts('computador');
     expect(result).toEqual(computadorSearch);
   });
 
   it('Deve retornar erro se o parametro for vazio', async () => {
-    // expect.assertions(1);
+    expect.assertions(1);
 
       try {
         await fetchProducts();

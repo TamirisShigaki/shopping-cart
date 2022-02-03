@@ -55,8 +55,8 @@ async function appendProduct() {
 }
 
 function addButtonsEvent() {
-  const itens = document.querySelectorAll('.item');
-    itens.forEach((item) => {
+  const items = document.querySelectorAll('.item');
+    items.forEach((item) => {
       const sku = getSkuFromProductItem(item);
       const button = item.querySelector('button');
       button.addEventListener('click', async () => {
