@@ -30,6 +30,7 @@ function getSkuFromProductItem(item) {
 
 function cartItemClickListener(event) {
   event.target.remove();
+  saveCartItems();
 }
 
 function createCartItemElement({ sku, name, salePrice }) {
@@ -68,17 +69,31 @@ function addButtonsEvent() {
         };
         const ol = document.querySelector('.cart__items');
         ol.appendChild(createCartItemElement(criaObj));
+        saveCartItems();
       });
     });
+}
+
+function itemsSalvos() {
+  JSON.parse(getSavedCartItems()).forEach((element) => {
+    const li = document.createElement('li');
+    li.className = 'cart__item';
+    li.innerText = element;
+    li.addEventListener('click', cartItemClickListener);
+
+    const ol = document.querySelector('.cart__items');
+    ol.appendChild(li);
+  });
 }
 
 window.onload = async () => {
   await appendProduct();
   addButtonsEvent();
+  itemsSalvos();
 };
 
-//! function appendProduct com ajuda do Kleverson Eller - Turma 19-C
+//! function appendProduct e requisito 4, com ajuda do Kleverson Eller - Turma 19-C
 
-//! function addButtonsEvent com ajuda do Roberval Filho - monitoria
+//! function addButtonsEvent, com ajuda do Roberval Filho - monitoria
 
-//! function saveItemCart com ajuda da Paula Ribeiro - Turma 19-C
+//! requisito 10 e 11, com ajuda da Paula Ribeiro - Turma 19-C
