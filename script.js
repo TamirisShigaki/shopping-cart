@@ -98,10 +98,23 @@ function removeItems() {
 }
 buttonRemove.addEventListener('click', removeItems);
 
+function criaLoading() {
+  const criaSection = document.createElement('section');
+  criaSection.textContent = 'Carregando...';
+  criaSection.className = 'loading';
+  document.querySelector('.items').appendChild(criaSection);
+}
+
+function encerraLoading() {
+document.querySelector('.loading').remove();
+}
+
 window.onload = async () => {
+  await criaLoading();
   await appendProduct();
   addButtonsEvent();
   getItemLocal();
+  encerraLoading();
 };
 
 //! function appendProduct, com ajuda do Kleverson Eller - Turma 19-C
