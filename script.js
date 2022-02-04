@@ -1,4 +1,4 @@
-const array = [];
+const ol = document.querySelector('.cart__items');
 
 function createProductImageElement(imageSource) {
   const img = document.createElement('img');
@@ -32,6 +32,7 @@ function getSkuFromProductItem(item) {
 
 function cartItemClickListener(event) {
   event.target.remove();
+  saveItemLocalStorage();
 }
 
 function createCartItemElement({ sku, name, salePrice }) {
@@ -68,39 +69,42 @@ function addButtonsEvent() {
           name: objeto.title,
           salePrice: objeto.price,
         };
-        const ol = document.querySelector('.cart__items');
+        // const ol = document.querySelector('.cart__items');
         ol.appendChild(createCartItemElement(criaObj));
+        saveItemLocalStorage();
       });
     });
 }
 
-async function saveItemLocalStorage() {
-  //* selecionar as ol
-  //* pegar cada li, empurrar pra um array tranformando as informações em string (JSON.stringfy
-  //* Salvar no localStorage (`saveCartItems` deve salvar os itens do carrinho)
-
-  //* recuperar essa lista e retornar se a pagina for atualizada (`getSavedCartItems` deve recuperar os itens do carrinho)
+function saveItemLocalStorage() {
+  const cartItems = document.querySelector('.cart__items').innerHTML;
+  saveCartItems(cartItems);
 }
 
-const buttonClear = document.querySelector('.empty-cart');
-function removeItemCart() {
-   const ol = document.querySelector('.cart__items');
-  ol.forEach((element) => {
-    element.parentNode.removeChild(element);
-  });
-}
-buttonClear.addEventListener('click', removeItemCart);
+function getItemLocal() {
+  const save = getSavedCartItems();
 
-/* const buttonRemove = document.querySelector('.empty-cart');
+  if (save) {
+     // const ol = document.querySelector('.cart__items');
+    ol.innerHTML = save;
+    document.querySelectorAll('.cart__item').forEach((li) => {
+      li.addEventListener('click', cartItemClickListener);
+    });
+  }
+}
+
+const buttonRemove = document.querySelector('.empty-cart');
 function removeItems() {
   const clearOl = document.querySelector('.cart__items');
   clearOl.innerHTML = '';
+  saveItemLocalStorage();
 }
-buttonRemove.addEventListener('click', removeItems); */
+buttonRemove.addEventListener('click', removeItems);
 
 window.onload = async () => {
   await appendProduct();
   addButtonsEvent();
+  getItemLocal();
 };
 
 //! function appendProduct, com ajuda do Kleverson Eller - Turma 19-C
