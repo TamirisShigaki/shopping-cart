@@ -66,8 +66,8 @@ function addButtonsEvent() {
           name: objeto.title,
           salePrice: objeto.price,
         };
-        const section = document.querySelector('.cart__items');
-        section.appendChild(createCartItemElement(criaObj));
+        const ol = document.querySelector('.cart__items');
+        ol.appendChild(createCartItemElement(criaObj));
       });
     });
 }
@@ -77,6 +77,8 @@ window.onload = async () => {
   addButtonsEvent();
 };
 
-//! function appendProduct() com ajuda do Kleverson Eller - Turma 19-C
+//! function appendProduct com ajuda do Kleverson Eller - Turma 19-C
 
-//! function addButtonsEvent() com ajuda do Roberval - monitoria
+//! function addButtonsEvent com ajuda do Roberval Filho - monitoria
+
+//! function saveItemCart com ajuda da Paula Ribeiro - Turma 19-C
