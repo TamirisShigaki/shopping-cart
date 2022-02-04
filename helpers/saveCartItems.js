@@ -1,8 +1,6 @@
-const saveCartItems = () => {
-  const getLi = document.querySelectorAll('.cart__items li');
-  const getItemCart = [...getLi].map((item) => item.innerText);
-
- localStorage.setItem('cartItems', JSON.stringify(getItemCart));
+const saveCartItems = (list) => {
+  const saved = localStorage.setItem('cartItems', list);
+  return saved;
 };
 
 if (typeof module !== 'undefined') {

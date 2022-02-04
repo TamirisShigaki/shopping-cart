@@ -1,4 +1,4 @@
-const ol = document.querySelector('.cart__items');
+const array = [];
 
 function createProductImageElement(imageSource) {
   const img = document.createElement('img');
@@ -32,7 +32,6 @@ function getSkuFromProductItem(item) {
 
 function cartItemClickListener(event) {
   event.target.remove();
-  saveCartItems();
 }
 
 function createCartItemElement({ sku, name, salePrice }) {
@@ -69,42 +68,42 @@ function addButtonsEvent() {
           name: objeto.title,
           salePrice: objeto.price,
         };
-        // const ol = document.querySelector('.cart__items');
+        const ol = document.querySelector('.cart__items');
         ol.appendChild(createCartItemElement(criaObj));
-        saveCartItems();
       });
     });
 }
 
-function itemsSalvos() {
-  JSON.parse(getSavedCartItems()).forEach((element) => {
-    const li = document.createElement('li');
-    li.className = 'cart__item';
-    li.innerText = element;
-    li.addEventListener('click', cartItemClickListener);
+async function saveItemLocalStorage() {
+  //* selecionar as ol
+  //* pegar cada li, empurrar pra um array tranformando as informações em string (JSON.stringfy
+  //* Salvar no localStorage (`saveCartItems` deve salvar os itens do carrinho)
 
-    // const ol = document.querySelector('.cart__items');
-    ol.appendChild(li);
-  });
+  //* recuperar essa lista e retornar se a pagina for atualizada (`getSavedCartItems` deve recuperar os itens do carrinho)
 }
 
 const buttonClear = document.querySelector('.empty-cart');
 function removeItemCart() {
-  // const ol = document.querySelector('.cart__items');
+   const ol = document.querySelector('.cart__items');
   ol.forEach((element) => {
     element.parentNode.removeChild(element);
   });
 }
 buttonClear.addEventListener('click', removeItemCart);
 
+/* const buttonRemove = document.querySelector('.empty-cart');
+function removeItems() {
+  const clearOl = document.querySelector('.cart__items');
+  clearOl.innerHTML = '';
+}
+buttonRemove.addEventListener('click', removeItems); */
+
 window.onload = async () => {
   await appendProduct();
   addButtonsEvent();
-  itemsSalvos();
-  removeItemCart();
 };
 
-//! function appendProduct e requisito 4, com ajuda do Kleverson Eller - Turma 19-C
+//! function appendProduct, com ajuda do Kleverson Eller - Turma 19-C
 
 //! function addButtonsEvent, com ajuda do Roberval Filho - monitoria
 
