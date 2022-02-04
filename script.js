@@ -1,3 +1,5 @@
+const ol = document.querySelector('.cart__items');
+
 function createProductImageElement(imageSource) {
   const img = document.createElement('img');
   img.className = 'item__image';
@@ -67,7 +69,7 @@ function addButtonsEvent() {
           name: objeto.title,
           salePrice: objeto.price,
         };
-        const ol = document.querySelector('.cart__items');
+        // const ol = document.querySelector('.cart__items');
         ol.appendChild(createCartItemElement(criaObj));
         saveCartItems();
       });
@@ -81,15 +83,25 @@ function itemsSalvos() {
     li.innerText = element;
     li.addEventListener('click', cartItemClickListener);
 
-    const ol = document.querySelector('.cart__items');
+    // const ol = document.querySelector('.cart__items');
     ol.appendChild(li);
   });
 }
+
+const buttonClear = document.querySelector('.empty-cart');
+function removeItemCart() {
+  // const ol = document.querySelector('.cart__items');
+  ol.forEach((element) => {
+    element.parentNode.removeChild(element);
+  });
+}
+buttonClear.addEventListener('click', removeItemCart);
 
 window.onload = async () => {
   await appendProduct();
   addButtonsEvent();
   itemsSalvos();
+  removeItemCart();
 };
 
 //! function appendProduct e requisito 4, com ajuda do Kleverson Eller - Turma 19-C
