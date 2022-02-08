@@ -119,12 +119,16 @@ body {
 }
 
 .item .item__add {
-  background-color: rgb(5, 52, 219);
+  background-color: rgb(10, 118, 79);
   border: 0;
   cursor: pointer;
   margin: 0;
   padding: 10px;
   color: white;
+}
+
+.item .item__add:hover {
+  background-color: rgb(79, 153, 126);
 }
 
 .cart {
@@ -140,10 +144,31 @@ body {
   overflow-y: scroll;
 }
 
+.cart__item {
+  width: auto;
+  height: auto;
+  border: 2px solid gray;
+  margin-top: 10px;
+  padding: 5px;
+  border-radius: 10px;
+}
+
+p {
+  display: flex;
+  justify-content: center;
+  margin: 20px;
+}
+
 .empty-cart {
   width: 170px;
   height: 35px;
   margin: 0 auto;
-  border: 2px solid rgb(5, 52, 219);
+  border: 2px solid rgb(10, 118, 79);
   background-color: rgb(249, 249, 246);
+  border-radius: 10px;
+}
+
+.empty-cart:hover {
+  width: 175px;
+  height: 40px;
 }

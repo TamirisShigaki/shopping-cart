@@ -143,7 +143,7 @@ function addButtonsEvent() {
     }); 
 }
 
-//! Re1uisito 3 - remove todos os itens do carrinho
+//! Requisito 3 - remove todos os itens do carrinho
 
 const buttonRemove = document.querySelector('.empty-cart');
 function removeItems() {
