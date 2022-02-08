@@ -1,4 +1,35 @@
-const ol = document.querySelector('.cart__items'); 
+const ol = document.querySelector('.cart__items');
+let somaTotal = 0;
+
+function getPrice() {
+  const cart = document.querySelector('.cart');
+  const criaP = document.createElement('p');
+  const criaSpan = document.createElement('span');
+
+  criaP.innerHTML = 'Sub-total: <strong>R$ </strong>';
+  criaSpan.className = 'total-price';
+  cart.appendChild(criaP);
+  criaP.appendChild(criaSpan);
+}
+
+function sumPrices() {
+  const totalPrice = document.querySelector('.total-price');
+  let textOl = ol.innerText;
+  let resultSum = 0;
+
+  textOl = textOl.match(/\$[0-9]*.[0-9]*/g);
+
+  if (textOl === 0 || textOl === null) {
+    totalPrice.innerText = 0;
+  } else {
+    textOl.forEach((price) => {
+      resultSum += +price.slice(1);
+    });
+    somaTotal = resultSum;
+
+    totalPrice.innerText = +somaTotal.toFixed(2);
+  }
+}
 
 function createProductImageElement(imageSource) {
   const img = document.createElement('img');
@@ -37,6 +68,7 @@ function saveItemLocalStorage() {
 
 function cartItemClickListener(event) {
   event.target.remove();
+  sumPrices();
   saveItemLocalStorage();
 }
 
@@ -87,14 +119,16 @@ function addButtonsEvent() {
         };
         ol.appendChild(createCartItemElement(criaObj));
         saveItemLocalStorage();
+        sumPrices();
       });
-    });
+    }); 
 }
 
 const buttonRemove = document.querySelector('.empty-cart');
 function removeItems() {
   ol.innerHTML = '';
   saveItemLocalStorage();
+  sumPrices();
 }
 buttonRemove.addEventListener('click', removeItems);
 
@@ -110,11 +144,13 @@ document.querySelector('.loading').remove();
 }
 
 window.onload = async () => {
-  await criaLoading();
+  getPrice();
+  criaLoading();
   await appendProduct();
   addButtonsEvent();
   getItemLocal();
   encerraLoading();
+  sumPrices();
 };
 
 //! function appendProduct, com ajuda do Kleverson Eller - Turma 19-C
