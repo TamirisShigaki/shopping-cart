@@ -1,36 +1,6 @@
 const ol = document.querySelector('.cart__items');
 let somaTotal = 0;
 
-function getPrice() {
-  const cart = document.querySelector('.cart');
-  const criaP = document.createElement('p');
-  const criaSpan = document.createElement('span');
-
-  criaP.innerHTML = 'Sub-total: <strong>R$ </strong>';
-  criaSpan.className = 'total-price';
-  cart.appendChild(criaP);
-  criaP.appendChild(criaSpan);
-}
-
-function sumPrices() {
-  const totalPrice = document.querySelector('.total-price');
-  let textOl = ol.innerText;
-  let resultSum = 0;
-
-  textOl = textOl.match(/\$[0-9]*.[0-9]*/g);
-
-  if (textOl === 0 || textOl === null) {
-    totalPrice.innerText = 0;
-  } else {
-    textOl.forEach((price) => {
-      resultSum += +price.slice(1);
-    });
-    somaTotal = resultSum;
-
-    totalPrice.innerText = +somaTotal.toFixed(2);
-  }
-}
-
 function createProductImageElement(imageSource) {
   const img = document.createElement('img');
   img.className = 'item__image';
@@ -61,16 +31,59 @@ function getSkuFromProductItem(item) {
   return item.querySelector('span.item__sku').innerText;
 }
 
+//! Requisito 5 - com ajuda do Erik Lima Turma 19-A
+// cria tag soma
+
+function getPrice() {
+  const cart = document.querySelector('.cart');
+  const criaP = document.createElement('p');
+  const criaSpan = document.createElement('span');
+
+  criaP.innerHTML = 'Sub-total: <strong>R$ </strong>';
+  criaSpan.className = 'total-price';
+  cart.appendChild(criaP);
+  criaP.appendChild(criaSpan);
+}
+
+//! Requisito 5 - com ajuda do Erik Lima Turma 19-A
+// soma valores
+// Regex - /\$[0-9]*.[0-9]*/g - https://medium.com/xp-inc/regex-um-guia-pratico-para-express%C3%B5es-regulares-1ac5fa4dd39f
+// .match -  https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/String/match
+// .slice - https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/slice
+
+function sumPrices() {
+  const totalPrice = document.querySelector('.total-price');
+  let textOl = ol.innerText;
+  let resultSum = 0;
+
+  textOl = textOl.match(/\$[0-9]*.[0-9]*/g);
+
+  if (textOl === 0 || textOl === null) {
+    totalPrice.innerText = 0;
+  } else {
+    textOl.forEach((price) => {
+      resultSum += +price.slice(1);
+    });
+    somaTotal = resultSum;
+
+    totalPrice.innerText = +somaTotal.toFixed(2);
+  }
+}
+
+//! Requisito 4 - salva no localStorage
+
 function saveItemLocalStorage() {
   const cartItems = document.querySelector('.cart__items').innerHTML;
   saveCartItems(cartItems);
 }
 
 function cartItemClickListener(event) {
-  event.target.remove();
+  event.target.remove(); 
   sumPrices();
   saveItemLocalStorage();
 }
+
+//! Requisito 4 - retorna o conteúdo salvo do localStorage
 
 function getItemLocal() {
   const save = getSavedCartItems();
@@ -91,6 +104,9 @@ function createCartItemElement({ sku, name, salePrice }) {
   return li;
 }
 
+//! Requisito 2  - function appendProduct, com ajuda do Kleverson Eller - Turma 19-C
+// cria objeto conforme pede o requisito, para aparecer no carrinho
+
 async function appendProduct() {
   const objeto = await fetchProducts('computador');
   objeto.results.forEach((elemento) => {
@@ -104,6 +120,9 @@ async function appendProduct() {
   section.appendChild(createProductItemElement(criaObj));
   });
 }
+
+//! Requisito 2 - function addButtonsEvent, com ajuda do Roberval Filho - monitoria
+// coloca os itens no carrinho de compra 
 
 function addButtonsEvent() {
   const items = document.querySelectorAll('.item');
@@ -124,6 +143,8 @@ function addButtonsEvent() {
     }); 
 }
 
+//! Re1uisito 3 - remove todos os itens do carrinho
+
 const buttonRemove = document.querySelector('.empty-cart');
 function removeItems() {
   ol.innerHTML = '';
@@ -139,6 +160,8 @@ function criaLoading() {
   document.querySelector('.items').appendChild(criaSection);
 }
 
+//! Requisito 7 - Adiciona um texto de "carregando" durante uma requisição à API
+
 function encerraLoading() {
 document.querySelector('.loading').remove();
 }
@@ -152,9 +175,5 @@ window.onload = async () => {
   encerraLoading();
   sumPrices();
 };
-
-//! function appendProduct, com ajuda do Kleverson Eller - Turma 19-C
-
-//! function addButtonsEvent, com ajuda do Roberval Filho - monitoria
 
 //! requisito 10 e 11, com ajuda da Paula Ribeiro - Turma 19-C
