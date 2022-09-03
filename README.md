@@ -2,7 +2,7 @@
 
 ## Contexto
 
-Projeto pessoal desenvolvido na Trybe, onde tive q desenvolver uma página web dinâmica buscando dados de produtos da API do Mercado Livre.
+Projeto pessoal desenvolvido na Trybe, onde tive que desenvolver uma página web dinâmica buscando dados de produtos da API do Mercado Livre.
 Também tive que implementar testes de unidade usando o framework Jest para verificar as funções assíncronas.
 
 A página é um site de comércio eletrônico que o usuário pode adicionar ou remover itens do carrinho de compras.
